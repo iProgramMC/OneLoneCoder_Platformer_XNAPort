@@ -1,3 +1,61 @@
+//#define DEBUG_INFO //uncomment this to see debug information
+
+//From Javidx9:
+/*
+OneLoneCoder.com - Code-It-Yourself! Simple Tile Based Platform Game
+"Its-a meee-a Jario!" - @Javidx9
+
+License
+~~~~~~~
+Copyright (C) 2018  Javidx9
+This program comes with ABSOLUTELY NO WARRANTY.
+This is free software, and you are welcome to redistribute it
+under certain conditions; See license for details.
+Original works located at:
+https://www.github.com/onelonecoder
+https://www.onelonecoder.com
+https://www.youtube.com/javidx9
+
+GNU GPLv3
+https://github.com/OneLoneCoder/videos/blob/master/LICENSE
+
+From Javidx9 :)
+~~~~~~~~~~~~~~~
+Hello! Ultimately I don't care what you use this for. It's intended to be
+educational, and perhaps to the oddly minded - a little bit of fun.
+Please hack this, change it and use it in any way you see fit. You acknowledge
+that I am not responsible for anything bad that happens as a result of
+your actions. However this code is protected by GNU GPLv3, see the license in the
+github repo. This means you must attribute me if you use it. You can view this
+license here: https://github.com/OneLoneCoder/videos/blob/master/LICENSE
+Cheers!
+
+
+Background
+~~~~~~~~~~
+Tile maps are fundamental to most 2D games. This program explores emulating a classic 2D platformer
+using floating point truncation to implement robust collision between a moving tile and a tilemap
+representing the level.
+
+Controls
+~~~~~~~~
+Left and Right arrow keys move Jario, Space bar jumps.
+(Up and Down also move jario)
+
+Author
+~~~~~~
+Twitter: @javidx9
+Blog: www.onelonecoder.com
+YouTube: www.youtube.com/javidx9
+Discord: https://discord.gg/WhwHUMV
+
+Video:
+~~~~~~
+https://youtu.be/oJvJZNyW_rw
+
+Last Updated: 04/02/2018
+*/
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +66,10 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+
+//NOTE: 0.0164 is the amount of seconds it usually takes to complete a frame.
+//Unlike OneLoneCoder's Console Game Engine, this has a fixed timestep, and it
+//calls Draw less often to make up for the duration it takes to Update the game.
 
 namespace OneLoneCoder_Platformer
 {
@@ -50,7 +112,7 @@ namespace OneLoneCoder_Platformer
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            IsFixedTimeStep = false;
+            //IsFixedTimeStep = false; //IsFixedTimeStep defaults to true.
 
             graphics.PreferredBackBufferWidth = 512;
         }
@@ -105,8 +167,8 @@ namespace OneLoneCoder_Platformer
 
 		char GetTile (float x, float y)
 		{
-            int nX = (int)Math.Floor(x);
-            int nY = (int)Math.Floor(y);
+            		int nX = (int)Math.Floor(x);
+            		int nY = (int)Math.Floor(y);
 			if (nX >= 0 && nX < nLevelWidth && y >= 0 && y < nLevelHeight)
 				return sLevel[(int)(nY * nLevelWidth + nX)];
 			else
@@ -299,132 +361,6 @@ namespace OneLoneCoder_Platformer
 
             prevKbState = kbState;
 
-		    // Handle Input
-		    /*if (IsFocused)
-		    {
-			    if (kbState.IsKeyDown(Keys.Up))
-			    {
-				    fPlayerVelY = -6.0f;
-			    }
-
-			    if (kbState.IsKeyDown(Keys.Down))
-			    {
-				    fPlayerVelY = 6.0f;
-			    }
-
-			    if (kbState.IsKeyDown(Keys.Left))
-			    {
-				    fPlayerVelX += (bPlayerOnGround ? -25.0f : -15.0f)*0.01f;
-				    nDirModY = 1;
-			    }
-
-			    if (kbState.IsKeyDown(Keys.Right))
-			    {
-				    fPlayerVelX += (bPlayerOnGround ? 25.0f : 15.0f)*0.01f;
-				    nDirModY = 0;
-			    }
-
-			    if (kbState.IsKeyDown(Keys.Space) && prevKbState.IsKeyUp(Keys.Space))
-			    {
-				    if (fPlayerVelY == 0)
-				    {
-					    fPlayerVelY = -12.0f;
-					    nDirModX = 1;
-				    }
-			    }
-		    }
-
-		    // Gravity
-		    fPlayerVelY += 20.0f * fElapsedTime;
-
-		    // Drag
-		    if (bPlayerOnGround)
-		    {
-			    fPlayerVelX += -3.0f * fPlayerVelX * fElapsedTime;
-			    if (Math.Abs(fPlayerVelX) < 0.01f)
-				    fPlayerVelX = 0.0f;
-		    }
-
-		    // Clamp velocities
-		    if (fPlayerVelX > 10.0f)
-			    fPlayerVelX = 10.0f;
-
-		    if (fPlayerVelX < -10.0f)
-			    fPlayerVelX = -10.0f;
-
-		    if (fPlayerVelY > 100.0f)
-			    fPlayerVelY = 100.0f;
-
-		    if (fPlayerVelY < -100.0f)
-			    fPlayerVelY = -100.0f;
-
-		    // Calculate potential new position
-		    float fNewPlayerPosX = fPlayerPosX + fPlayerVelX * 0.1f;
-            float fNewPlayerPosY = fPlayerPosY + fPlayerVelY * 0.1f;
-
-		    // Check for pickups!
-            if (GetTile((int)fNewPlayerPosX + 0.0f, (int)fNewPlayerPosY + 0.0f) == 'o')
-                SetTile((int)fNewPlayerPosX + 0.0f, (int)(int)fNewPlayerPosY + 0.0f, '.');
-
-            if (GetTile((int)fNewPlayerPosX + 0.0f, (int)fNewPlayerPosY + 1.0f) == 'o')
-                SetTile((int)fNewPlayerPosX + 0.0f, (int)fNewPlayerPosY + 1.0f, '.');
-
-            if (GetTile((int)fNewPlayerPosX + 1.0f, (int)fNewPlayerPosY + 0.0f) == 'o')
-                SetTile((int)fNewPlayerPosX + 1.0f, (int)fNewPlayerPosY + 0.0f, '.');
-
-            if (GetTile((int)fNewPlayerPosX + 1.0f, (int)fNewPlayerPosY + 1.0f) == 'o')
-                SetTile((int)fNewPlayerPosX + 1.0f, (int)fNewPlayerPosY + 1.0f, '.');
-
-		    // Check for Collision
-		    if (fPlayerVelX <= 0) // Moving Left
-		    {
-			    if (GetTile(fNewPlayerPosX + 0.0f, fPlayerPosY + 0.0f) != '.' || GetTile(fNewPlayerPosX + 0.0f, fPlayerPosY + 0.9f) != '.')
-			    {
-				    fNewPlayerPosX = (int)fNewPlayerPosX + 1;
-				    fPlayerVelX = 0;
-			    }
-		    }
-		    else // Moving Right
-		    {
-			    if (GetTile(fNewPlayerPosX + 1.0f, fPlayerPosY + 0.0f) != '.' || GetTile(fNewPlayerPosX + 1.0f, fPlayerPosY + 0.9f) != '.')
-			    {
-				    fNewPlayerPosX = (int)fNewPlayerPosX;
-				    fPlayerVelX = 0;
-
-			    }
-		    }
-
-		    bPlayerOnGround = false;
-		    if (fPlayerVelY <= 0) // Moving Up
-		    {
-			    if (GetTile(fPlayerPosX + 0.0f, fNewPlayerPosY) != '.' || GetTile(fPlayerPosX + 0.9f, fNewPlayerPosY) != '.')
-			    {
-				    fNewPlayerPosY = (int)fNewPlayerPosY + 1;
-				    fPlayerVelY = 0;
-			    }
-		    }
-		    else // Moving Down
-		    {
-			    if (GetTile(fNewPlayerPosX + 0.0f, fNewPlayerPosY + 1.0f) != '.' || GetTile(fNewPlayerPosX + 0.9f, fNewPlayerPosY + 1.0f) != '.')
-			    {
-				    fNewPlayerPosY = (int)fNewPlayerPosY;
-				    fPlayerVelY = 0;
-				    bPlayerOnGround = true; // Player has a solid surface underfoot
-				    nDirModX = 0;
-			    }
-		    }
-
-		    // Apply new position
-		    fPlayerPosX = fNewPlayerPosX;
-		    fPlayerPosY = fNewPlayerPosY;
-
-		    // Link camera to player position
-		    fCameraPosX = fPlayerPosX;
-		    fCameraPosY = fPlayerPosY;
-            */
-		
-	
-
             base.Update(gameTime);
         }
 
@@ -514,12 +450,12 @@ namespace OneLoneCoder_Platformer
             DrawPartialSprite((int)((fPlayerPosX - fOffsetX) * nTileWidth), (int)((fPlayerPosY - fOffsetY) * nTileWidth), spriteMan, nDirModX * nTileWidth, nDirModY * nTileHeight, nTileWidth, nTileHeight);
             
             //Debug info
-            //spriteBatch.DrawString(sf, "POSX " + fPlayerPosX.ToString(), new Vector2(10, 10), Color.White);
-            //spriteBatch.DrawString(sf, "POSY " + fPlayerPosY.ToString(), new Vector2(10, 20), Color.White);
-            //spriteBatch.DrawString(sf, "HSPD " + fPlayerVelX.ToString(), new Vector2(10, 30), Color.White);
-            //spriteBatch.DrawString(sf, "VSPD " + fPlayerVelY.ToString(), new Vector2(10, 40), Color.White);
-
-            //spriteBatch.DrawString(sf, "POSX " + fPlayerPosX.ToString(), new Vector2(10, 10), Color.White);
+	    #if DEBUG_INFO
+            spriteBatch.DrawString(sf, "POSX " + fPlayerPosX.ToString(), new Vector2(10, 10), Color.White);
+            spriteBatch.DrawString(sf, "POSY " + fPlayerPosY.ToString(), new Vector2(10, 20), Color.White);
+            spriteBatch.DrawString(sf, "HSPD " + fPlayerVelX.ToString(), new Vector2(10, 30), Color.White);
+            spriteBatch.DrawString(sf, "VSPD " + fPlayerVelY.ToString(), new Vector2(10, 40), Color.White);
+	    #endif
 
             spriteBatch.End();
 
