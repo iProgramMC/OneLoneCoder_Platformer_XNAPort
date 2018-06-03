@@ -9,6 +9,7 @@ OneLoneCoder Platformer XNA Port
 Copyright (C) 2018, iProgramMC, OneLoneCoder
 
 https://github.com/iProgramMC
+
 https://github.com/OneLoneCoder
 
 This program is free software: you can redistribute it and/or modify
