@@ -114,7 +114,9 @@ namespace OneLoneCoder_Platformer
             Content.RootDirectory = "Content";
             //IsFixedTimeStep = false; //IsFixedTimeStep defaults to true.
 
-            graphics.PreferredBackBufferWidth = 512;
+            IsFixedTimeStep = false;
+            Window.AllowUserResizing = true;
+            IsMouseVisible = true;
         }
 
         /// <summary>
@@ -274,6 +276,7 @@ namespace OneLoneCoder_Platformer
                     if (fPlayerVelY >= -0.5f && fPlayerVelY <= 0.5f)
                     {
                         fPlayerVelY = -12.0f;
+			nDirModX = 1;
                     }
                     //fPlayerVelX += 6.0f * 0.0164f;
                 }
@@ -291,12 +294,7 @@ namespace OneLoneCoder_Platformer
             if (fPlayerVelY < -100.0f)
                 fPlayerVelY = -100.0f;
 
-            if (fPlayerVelY >= -0.5f && fPlayerVelY <= 0.5f)
-            {
-                fPlayerVelX += -1.0f * fPlayerVelX * 0.0164f;
-                if (Math.Abs(fPlayerVelX) < 0.01f)
-                    fPlayerVelX = 0.0f;
-            }
+           
 
             float fNewPlayerPosX = fPlayerPosX + fPlayerVelX * 0.0164f;
             float fNewPlayerPosY = fPlayerPosY + fPlayerVelY * 0.0164f;
@@ -349,9 +347,17 @@ namespace OneLoneCoder_Platformer
                 {
                     fNewPlayerPosY = (int)Math.Floor(fNewPlayerPosY);
                     fPlayerVelY = 0;
+		    nDirModX = 0;
+		    bPlayerOnGround = true;
                 }
             }
 
+            if (bPlayerOnGround)
+            {
+                fPlayerVelX += -1.0f * fPlayerVelX * 0.0164f;
+                if (Math.Abs(fPlayerVelX) < 0.01f)
+                    fPlayerVelX = 0.0f;
+            }
 
             fPlayerPosX = fNewPlayerPosX;
             fPlayerPosY = fNewPlayerPosY;
@@ -410,9 +416,9 @@ namespace OneLoneCoder_Platformer
             float fTileOffsetY = (fOffsetY - (int)fOffsetY) * nTileHeight;
 
             // Draw visible tile map
-            for (int x = -1; x < nVisibleTilesX + 1; x++)
+            for (int x = -3; x < nVisibleTilesX + 3; x++)
             {
-                for (int y = -1; y < nVisibleTilesY + 1; y++)
+                for (int y = -3; y < nVisibleTilesY + 3; y++)
                 {
                     char sTileID = GetTile(x + fOffsetX, y + fOffsetY);
                     switch (sTileID)
