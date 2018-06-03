@@ -21,3 +21,8 @@ This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
+
+Note that I am NOT providing solution files, you have to make them
+yourself.
+
+(VS2010 and XNA Game Studio 4.0/Monogame are required)
