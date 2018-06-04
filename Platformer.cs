@@ -81,32 +81,32 @@ namespace OneLoneCoder_Platformer
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-	// Level storage
-	string sLevel;
-	int nLevelWidth;
-	int nLevelHeight;
+        // Level storage
+        string sLevel;
+        int nLevelWidth;
+        int nLevelHeight;
 
-    const float fGravityFactor = 20.0f;
+        const float fGravityFactor = 20.0f;
 
-	// Player Properties
-	float fPlayerPosX = 1.0f;
-	float fPlayerPosY = 1.0f;
-	float fPlayerVelX = 0.0f;
-	float fPlayerVelY = 0.0f;
-	bool bPlayerOnGround = false;
+        // Player Properties
+        float fPlayerPosX = 1.0f;
+        float fPlayerPosY = 1.0f;
+        float fPlayerVelX = 0.0f;
+        float fPlayerVelY = 0.0f;
+        bool bPlayerOnGround = false;
 
-	// Camera properties
-	float fCameraPosX = 0.0f;
-	float fCameraPosY = 0.0f;
+        // Camera properties
+        float fCameraPosX = 0.0f;
+        float fCameraPosY = 0.0f;
 
-    Texture2D spriteMan;
-    Texture2D spriteTiles;
+        Texture2D spriteMan;
+        Texture2D spriteTiles;
 
-    SpriteFont sf;
+        SpriteFont sf;
 
-	// Sprite selection flags
-	int nDirModX = 0;
-	int nDirModY = 0;
+        // Sprite selection flags
+        int nDirModX = 0;
+        int nDirModY = 0;
 
         public Platformer()
         {
@@ -128,25 +128,25 @@ namespace OneLoneCoder_Platformer
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            
-		    nLevelWidth = 64;
-		    nLevelHeight = 16;
-		    sLevel += "................................................................";
-		    sLevel += "................................................................";
-		    sLevel += ".......ooooo....................................................";
-		    sLevel += "........ooo.....................................................";
-		    sLevel += ".......................########.................................";
-		    sLevel += ".....BB?BBBB?BB.......###..............#.#......................";
-		    sLevel += "....................###................#.#......................";
-		    sLevel += "...................####.........................................";
-		    sLevel += "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG.##############.....########";
-		    sLevel += "...................................#.#...............###........";
-		    sLevel += "........................############.#............###...........";
-		    sLevel += "........................#............#.........###..............";
-		    sLevel += "........................#.############......###.................";
-		    sLevel += "........................#................###....................";
-		    sLevel += "........................#################.......................";
-		    sLevel += "................................................................";
+
+            nLevelWidth = 64;
+            nLevelHeight = 16;
+            sLevel += "................................................................";
+            sLevel += "................................................................";
+            sLevel += ".......ooooo....................................................";
+            sLevel += "........ooo.....................................................";
+            sLevel += ".......................########.................................";
+            sLevel += ".....BB?BBBB?BB.......###..............#.#......................";
+            sLevel += "....................###................#.#......................";
+            sLevel += ".......{}..........####.........................................";
+            sLevel += "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG.##############.....########";
+            sLevel += "...................................#.#...............###........";
+            sLevel += "........................############.#............###...........";
+            sLevel += "........................#............#.........###..............";
+            sLevel += "........................#.############......###.................";
+            sLevel += "........................#................###....................";
+            sLevel += "........................#################.......................";
+            sLevel += "................................................................";
 
             base.Initialize();
         }
@@ -167,15 +167,15 @@ namespace OneLoneCoder_Platformer
             // TODO: use this.Content to load your game content here
         }
 
-		char GetTile (float x, float y)
-		{
-            		int nX = (int)Math.Floor(x);
-            		int nY = (int)Math.Floor(y);
-			if (nX >= 0 && nX < nLevelWidth && y >= 0 && y < nLevelHeight)
-				return sLevel[(int)(nY * nLevelWidth + nX)];
-			else
-				return ' ';
-		}
+        char GetTile(float x, float y)
+        {
+            int nX = (int)Math.Floor(x);
+            int nY = (int)Math.Floor(y);
+            if (nX >= 0 && nX < nLevelWidth && y >= 0 && y < nLevelHeight)
+                return sLevel[(int)(nY * nLevelWidth + nX)];
+            else
+                return ' ';
+        }
 
         char GetTile(int x, int y)
         {
@@ -196,8 +196,8 @@ namespace OneLoneCoder_Platformer
             //sLevel[(int)Math.Floor(y)*nLevelWidth + (int)Math.Floor(x)] = c;
         }
 
-		void SetTile (float x, float y, char c)
-		{
+        void SetTile(float x, float y, char c)
+        {
             int nX = (int)Math.Floor(x); int nY = (int)Math.Floor(y);
             if (nX >= 0 && nX < nLevelWidth && nY >= 0 && nY < nLevelHeight)
             {
@@ -205,8 +205,8 @@ namespace OneLoneCoder_Platformer
                 s[(int)(nY * nLevelWidth + nX)] = c;
                 sLevel = new string(s);
             }
-				//sLevel[(int)Math.Floor(y)*nLevelWidth + (int)Math.Floor(x)] = c;
-		}
+            //sLevel[(int)Math.Floor(y)*nLevelWidth + (int)Math.Floor(x)] = c;
+        }
 
         KeyboardState prevKbState = new KeyboardState();
 
@@ -240,15 +240,15 @@ namespace OneLoneCoder_Platformer
         {
             // Utility Lambdas
 
-		//fPlayerVelX = 0.0f;
-		//fPlayerVelY = 0.0f;
+            //fPlayerVelX = 0.0f;
+            //fPlayerVelY = 0.0f;
 
             //float fElapsedTime = 0.0164f;
 
             KeyboardState kbState = Keyboard.GetState();
 
             //fPlayerVelX = 0.0f;
-            fPlayerVelY += fGravityFactor*0.0164f;
+            fPlayerVelY += fGravityFactor * 0.0164f;
 
 
             if (IsFocused)
@@ -263,12 +263,12 @@ namespace OneLoneCoder_Platformer
                 }
                 if (kbState.IsKeyDown(Keys.Left))
                 {
-                    fPlayerVelX += -6.0f*0.0164f;
+                    fPlayerVelX += -6.0f * 0.0164f;
                     nDirModY = 1;
                 }
                 if (kbState.IsKeyDown(Keys.Right))
                 {
-                    fPlayerVelX += 6.0f*0.0164f;
+                    fPlayerVelX += 6.0f * 0.0164f;
                     nDirModY = 0;
                 }
                 if (kbState.IsKeyDown(Keys.Space) && !prevKbState.IsKeyDown(Keys.Space))
@@ -276,7 +276,7 @@ namespace OneLoneCoder_Platformer
                     if (fPlayerVelY >= -0.5f && fPlayerVelY <= 0.5f)
                     {
                         fPlayerVelY = -12.0f;
-			nDirModX = 1;
+                        nDirModX = 1;
                     }
                     //fPlayerVelX += 6.0f * 0.0164f;
                 }
@@ -294,28 +294,28 @@ namespace OneLoneCoder_Platformer
             if (fPlayerVelY < -100.0f)
                 fPlayerVelY = -100.0f;
 
-           
+
 
             float fNewPlayerPosX = fPlayerPosX + fPlayerVelX * 0.0164f;
             float fNewPlayerPosY = fPlayerPosY + fPlayerVelY * 0.0164f;
 
-            if (GetTile((int)fNewPlayerPosX + 0.0f, (int)fNewPlayerPosY + 0.0f) == 'o')
+            if (GetSolidity(GetTile((int)fNewPlayerPosX + 0.0f, (int)fNewPlayerPosY + 0.0f)) == 'o')
                 SetTile((int)fNewPlayerPosX + 0.0f, (int)(int)fNewPlayerPosY + 0.0f, '.');
 
-            if (GetTile((int)fNewPlayerPosX + 0.0f, (int)fNewPlayerPosY + 1.0f) == 'o')
+            if (GetSolidity(GetTile((int)fNewPlayerPosX + 0.0f, (int)fNewPlayerPosY + 1.0f)) == 'o')
                 SetTile((int)fNewPlayerPosX + 0.0f, (int)fNewPlayerPosY + 1.0f, '.');
 
-            if (GetTile((int)fNewPlayerPosX + 1.0f, (int)fNewPlayerPosY + 0.0f) == 'o')
+            if (GetSolidity(GetTile((int)fNewPlayerPosX + 1.0f, (int)fNewPlayerPosY + 0.0f)) == 'o')
                 SetTile((int)fNewPlayerPosX + 1.0f, (int)fNewPlayerPosY + 0.0f, '.');
 
-            if (GetTile((int)fNewPlayerPosX + 1.0f, (int)fNewPlayerPosY + 1.0f) == 'o')
+            if (GetSolidity(GetTile((int)fNewPlayerPosX + 1.0f, (int)fNewPlayerPosY + 1.0f)) == 'o')
                 SetTile((int)fNewPlayerPosX + 1.0f, (int)fNewPlayerPosY + 1.0f, '.');
 
             //Collision
             if (fPlayerVelX <= 0)
             {
-                if (GetTile((int)Math.Floor(fNewPlayerPosX + 0.0f), (int)Math.Floor(fPlayerPosY + 0.0f)) != '.' ||
-                    GetTile((int)Math.Floor(fNewPlayerPosX + 0.0f), (int)Math.Floor(fPlayerPosY + 0.8f)) != '.')
+                if (GetSolidity(GetTile((int)Math.Floor(fNewPlayerPosX + 0.0f), (int)Math.Floor(fPlayerPosY + 0.0f))) != '.' ||
+                    GetSolidity(GetTile((int)Math.Floor(fNewPlayerPosX + 0.0f), (int)Math.Floor(fPlayerPosY + 0.8f))) != '.')
                 {
                     fNewPlayerPosX = (int)Math.Floor(fNewPlayerPosX + 1);
                     fPlayerVelX = 0;
@@ -323,8 +323,8 @@ namespace OneLoneCoder_Platformer
             }
             else
             {
-                if (GetTile((int)Math.Floor(fNewPlayerPosX + 1.0f), (int)Math.Floor(fPlayerPosY + 0.0f)) != '.' ||
-                    GetTile((int)Math.Floor(fNewPlayerPosX + 1.0f), (int)Math.Floor(fPlayerPosY + 0.8f)) != '.')
+                if (GetSolidity(GetTile((int)Math.Floor(fNewPlayerPosX + 1.0f), (int)Math.Floor(fPlayerPosY + 0.0f))) != '.' ||
+                    GetSolidity(GetTile((int)Math.Floor(fNewPlayerPosX + 1.0f), (int)Math.Floor(fPlayerPosY + 0.8f))) != '.')
                 {
                     fNewPlayerPosX = (int)Math.Floor(fNewPlayerPosX);
                     fPlayerVelX = 0;
@@ -333,22 +333,22 @@ namespace OneLoneCoder_Platformer
 
             if (fPlayerVelY <= 0)
             {
-                if (GetTile((int)Math.Floor(fNewPlayerPosX + 0.0f), (int)Math.Floor(fPlayerPosY-0.1f)) != '.' ||
-                    GetTile((int)Math.Floor(fNewPlayerPosX + 0.9f), (int)Math.Floor(fPlayerPosY-0.1f)) != '.')
+                if (GetSolidity(GetTile((int)Math.Floor(fNewPlayerPosX + 0.0f), (int)Math.Floor(fPlayerPosY - 0.1f)))!= '.' ||
+                    GetSolidity(GetTile((int)Math.Floor(fNewPlayerPosX + 0.9f), (int)Math.Floor(fPlayerPosY - 0.1f))) != '.')
                 {
-                    fNewPlayerPosY = (float)Math.Floor(fNewPlayerPosY+1);
+                    fNewPlayerPosY = (float)Math.Floor(fNewPlayerPosY + 1);
                     fPlayerVelY = 0;
                 }
             }
             else
             {
-                if (GetTile((int)Math.Floor(fNewPlayerPosX + 0.0f), (int)Math.Floor(fPlayerPosY + 1f)) != '.' ||
-                    GetTile((int)Math.Floor(fNewPlayerPosX + 0.9f), (int)Math.Floor(fPlayerPosY + 1f)) != '.')
+                if (GetSolidity(GetTile((int)Math.Floor(fNewPlayerPosX + 0.0f), (int)Math.Floor(fPlayerPosY + 1f))) != '.' ||
+                    GetSolidity(GetTile((int)Math.Floor(fNewPlayerPosX + 0.9f), (int)Math.Floor(fPlayerPosY + 1f))) != '.')
                 {
                     fNewPlayerPosY = (int)Math.Floor(fNewPlayerPosY);
                     fPlayerVelY = 0;
-		    nDirModX = 0;
-		    bPlayerOnGround = true;
+                    nDirModX = 0;
+                    bPlayerOnGround = true;
                 }
             }
 
@@ -373,13 +373,26 @@ namespace OneLoneCoder_Platformer
         public int ScreenWidth()
         {
 
-            return 256;
-            //return GraphicsDevice.Viewport.Width;
+            return GraphicsDevice.Viewport.Width/2;
         }
         public int ScreenHeight()
         {
-            return 240;
-            //return GraphicsDevice.Viewport.Height;
+            //return 240;
+            return GraphicsDevice.Viewport.Height/2;
+        }
+
+        public char GetSolidity(char t)
+        {
+            switch (t)
+            {
+                case '.':
+                case '{':
+                case '}':
+                    return '.';
+                case 'o':
+                    return 'o';
+                default: return '#';
+            }
         }
 
         public void DrawPartialSprite(int x, int y, Texture2D texture, int ox, int oy, int ow, int oh) { spriteBatch.Draw(texture, new Rectangle(x, y, ow, oh), new Rectangle(ox, oy, ow, oh), Color.White); }
@@ -390,10 +403,10 @@ namespace OneLoneCoder_Platformer
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.FromNonPremultiplied(0,255,255,255));
+            GraphicsDevice.Clear(Color.FromNonPremultiplied(0, 255, 255, 255));
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin(SpriteSortMode.Immediate, null, SamplerState.PointWrap, 
+            spriteBatch.Begin(SpriteSortMode.Immediate, null, SamplerState.PointWrap,
                 null, null, null, Matrix.CreateScale(2f));
             // Draw Level
             int nTileWidth = 16;
@@ -423,45 +436,52 @@ namespace OneLoneCoder_Platformer
                     char sTileID = GetTile(x + fOffsetX, y + fOffsetY);
                     switch (sTileID)
                     {
-                    case '.': // Sky
-                    
-                        //Fill(x * nTileWidth - fTileOffsetX, y * nTileHeight - fTileOffsetY, (x + 1) * nTileWidth - fTileOffsetX, (y + 1) * nTileHeight - fTileOffsetY, PIXEL_SOLID, FG_CYAN);
-                        break;
-                    case '#': // Solid Block
-                        //Fill(x * nTileWidth - fTileOffsetX, y * nTileHeight - fTileOffsetY, (x + 1) * nTileWidth - fTileOffsetX, (y + 1) * nTileHeight - fTileOffsetY, PIXEL_SOLID, FG_RED);
-                        DrawPartialSprite((int)(x * nTileWidth - fTileOffsetX), (int)(y * nTileHeight - fTileOffsetY), spriteTiles, 2 * nTileWidth, 0 * nTileHeight, nTileWidth, nTileHeight);
-                        break;
-                    case 'G': // Ground Block
-                        DrawPartialSprite((int)(x * nTileWidth - fTileOffsetX), (int)(y * nTileHeight - fTileOffsetY), spriteTiles, 0 * nTileWidth, 0 * nTileHeight, nTileWidth, nTileHeight);
-                        break;
-                    case 'B': // Brick Block
-                        DrawPartialSprite((int)(x * nTileWidth - fTileOffsetX), (int)(y * nTileHeight - fTileOffsetY), spriteTiles, 0 * nTileWidth, 1 * nTileHeight, nTileWidth, nTileHeight);
-                        break;
-                    case '?': // Question Block
-                        DrawPartialSprite((int)(x * nTileWidth - fTileOffsetX), (int)(y * nTileHeight - fTileOffsetY), spriteTiles, 1 * nTileWidth, 1 * nTileHeight, nTileWidth, nTileHeight);
-                        break;
-                    case 'o': // Coin
-                        //Fill(x * nTileWidth - fTileOffsetX, y * nTileHeight - fTileOffsetY, (x + 1) * nTileWidth - fTileOffsetX, (y + 1) * nTileHeight - fTileOffsetY, PIXEL_SOLID, FG_CYAN);
-                        DrawPartialSprite((int)(x * nTileWidth - fTileOffsetX), (int)(y * nTileHeight - fTileOffsetY), spriteTiles, 3 * nTileWidth, 0 * nTileHeight, nTileWidth, nTileHeight);
-                        break;
-                    default:
+                        case '.': // Sky
 
-                        //Fill(x * nTileWidth - fTileOffsetX, y * nTileHeight - fTileOffsetY, (x + 1) * nTileWidth - fTileOffsetX, (y + 1) * nTileHeight - fTileOffsetY, PIXEL_SOLID, FG_BLACK);
-                        break;
+                            //Fill(x * nTileWidth - fTileOffsetX, y * nTileHeight - fTileOffsetY, (x + 1) * nTileWidth - fTileOffsetX, (y + 1) * nTileHeight - fTileOffsetY, PIXEL_SOLID, FG_CYAN);
+                            break;
+                        case '#': // Solid Block
+                            //Fill(x * nTileWidth - fTileOffsetX, y * nTileHeight - fTileOffsetY, (x + 1) * nTileWidth - fTileOffsetX, (y + 1) * nTileHeight - fTileOffsetY, PIXEL_SOLID, FG_RED);
+                            DrawPartialSprite((int)(x * nTileWidth - fTileOffsetX), (int)(y * nTileHeight - fTileOffsetY), spriteTiles, 2 * nTileWidth, 0 * nTileHeight, nTileWidth, nTileHeight);
+                            break;
+                        case 'G': // Ground Block
+                            DrawPartialSprite((int)(x * nTileWidth - fTileOffsetX), (int)(y * nTileHeight - fTileOffsetY), spriteTiles, 0 * nTileWidth, 0 * nTileHeight, nTileWidth, nTileHeight);
+                            break;
+                        case 'B': // Brick Block
+                            DrawPartialSprite((int)(x * nTileWidth - fTileOffsetX), (int)(y * nTileHeight - fTileOffsetY), spriteTiles, 0 * nTileWidth, 1 * nTileHeight, nTileWidth, nTileHeight);
+                            break;
+                        case '?': // Question Block
+                            DrawPartialSprite((int)(x * nTileWidth - fTileOffsetX), (int)(y * nTileHeight - fTileOffsetY), spriteTiles, 1 * nTileWidth, 1 * nTileHeight, nTileWidth, nTileHeight);
+                            break;
+                        case 'o': // Coin
+                            //Fill(x * nTileWidth - fTileOffsetX, y * nTileHeight - fTileOffsetY, (x + 1) * nTileWidth - fTileOffsetX, (y + 1) * nTileHeight - fTileOffsetY, PIXEL_SOLID, FG_CYAN);
+                            DrawPartialSprite((int)(x * nTileWidth - fTileOffsetX), (int)(y * nTileHeight - fTileOffsetY), spriteTiles, 3 * nTileWidth, 0 * nTileHeight, nTileWidth, nTileHeight);
+                            break;
+                        case '{': // Scenery 1
+                            //Fill(x * nTileWidth - fTileOffsetX, y * nTileHeight - fTileOffsetY, (x + 1) * nTileWidth - fTileOffsetX, (y + 1) * nTileHeight - fTileOffsetY, PIXEL_SOLID, FG_CYAN);
+                            DrawPartialSprite((int)(x * nTileWidth - fTileOffsetX), (int)(y * nTileHeight - fTileOffsetY), spriteTiles, 2 * nTileWidth, 1 * nTileHeight, nTileWidth, nTileHeight);
+                            break;
+                        case '}':
+                            DrawPartialSprite((int)(x * nTileWidth - fTileOffsetX), (int)(y * nTileHeight - fTileOffsetY), spriteTiles, 3 * nTileWidth, 1 * nTileHeight, nTileWidth, nTileHeight);
+                            break;
+                        default:
+
+                            //Fill(x * nTileWidth - fTileOffsetX, y * nTileHeight - fTileOffsetY, (x + 1) * nTileWidth - fTileOffsetX, (y + 1) * nTileHeight - fTileOffsetY, PIXEL_SOLID, FG_BLACK);
+                            break;
                     }
                 }
             }
 
             // Draw Player
             DrawPartialSprite((int)((fPlayerPosX - fOffsetX) * nTileWidth), (int)((fPlayerPosY - fOffsetY) * nTileWidth), spriteMan, nDirModX * nTileWidth, nDirModY * nTileHeight, nTileWidth, nTileHeight);
-            
+
             //Debug info
-	    #if DEBUG_INFO
+#if DEBUG_INFO
             spriteBatch.DrawString(sf, "POSX " + fPlayerPosX.ToString(), new Vector2(10, 10), Color.White);
             spriteBatch.DrawString(sf, "POSY " + fPlayerPosY.ToString(), new Vector2(10, 20), Color.White);
             spriteBatch.DrawString(sf, "HSPD " + fPlayerVelX.ToString(), new Vector2(10, 30), Color.White);
             spriteBatch.DrawString(sf, "VSPD " + fPlayerVelY.ToString(), new Vector2(10, 40), Color.White);
-	    #endif
+#endif
 
             spriteBatch.End();
 
