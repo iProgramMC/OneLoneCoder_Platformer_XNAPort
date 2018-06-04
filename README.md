@@ -1,4 +1,4 @@
-# OneLoneCoder_Platformer_XNAPort
+# OneLoneCoder Platformer XNA Port
 A port in C# with the XNA Game Framework of OneLoneCoder's (javidx9's) platformer engine.
 This engine can also work with Monogame, which is a more "universal" XNA
 implementation.
