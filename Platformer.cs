@@ -102,6 +102,7 @@ namespace OneLoneCoder_Platformer
         Texture2D spriteMan;
         Texture2D spriteTiles;
 
+        float scale = 2f;
         SpriteFont sf;
 
         // Sprite selection flags
@@ -280,6 +281,21 @@ namespace OneLoneCoder_Platformer
                     }
                     //fPlayerVelX += 6.0f * 0.0164f;
                 }
+                if (kbState.IsKeyDown(Keys.F1))
+                {
+                    scale = 1.0f;
+                    //fPlayerVelX += 6.0f * 0.0164f;
+                }
+                if (kbState.IsKeyDown(Keys.F2))
+                {
+                    scale = 2.0f;
+                    //fPlayerVelX += 6.0f * 0.0164f;
+                }
+                if (kbState.IsKeyDown(Keys.F3))
+                {
+                    scale = 3.0f;
+                    //fPlayerVelX += 6.0f * 0.0164f;
+                }
             }
 
             if (fPlayerVelX > 10.0f)
@@ -336,6 +352,14 @@ namespace OneLoneCoder_Platformer
                 if (GetSolidity(GetTile((int)Math.Floor(fNewPlayerPosX + 0.0f), (int)Math.Floor(fPlayerPosY - 0.1f)))!= '.' ||
                     GetSolidity(GetTile((int)Math.Floor(fNewPlayerPosX + 0.9f), (int)Math.Floor(fPlayerPosY - 0.1f))) != '.')
                 {
+                    if (GetSolidity(GetTile((int)Math.Floor(fNewPlayerPosX + 0.0f), (int)Math.Floor(fPlayerPosY - 0.1f))) == 'B')
+                    {
+                        SetTile((int)Math.Floor(fNewPlayerPosX + 0.9f), (int)Math.Floor(fPlayerPosY - 0.1f), '.');
+                    }
+                    else if(GetSolidity(GetTile((int)Math.Floor(fNewPlayerPosX + 0.9f), (int)Math.Floor(fPlayerPosY - 0.1f))) == 'B')
+                    {
+                        SetTile((int)Math.Floor(fNewPlayerPosX + 0.9f), (int)Math.Floor(fPlayerPosY - 0.1f), '.');
+                    }
                     fNewPlayerPosY = (float)Math.Floor(fNewPlayerPosY + 1);
                     fPlayerVelY = 0;
                 }
@@ -373,12 +397,12 @@ namespace OneLoneCoder_Platformer
         public int ScreenWidth()
         {
 
-            return GraphicsDevice.Viewport.Width/2;
+            return (int)(GraphicsDevice.Viewport.Width/scale);
         }
         public int ScreenHeight()
         {
             //return 240;
-            return GraphicsDevice.Viewport.Height/2;
+            return (int)(GraphicsDevice.Viewport.Height/scale);
         }
 
         public char GetSolidity(char t)
@@ -391,6 +415,8 @@ namespace OneLoneCoder_Platformer
                     return '.';
                 case 'o':
                     return 'o';
+                case 'B':
+                    return 'B';
                 default: return '#';
             }
         }
@@ -407,7 +433,7 @@ namespace OneLoneCoder_Platformer
 
             // TODO: Add your drawing code here
             spriteBatch.Begin(SpriteSortMode.Immediate, null, SamplerState.PointWrap,
-                null, null, null, Matrix.CreateScale(2f));
+                null, null, null, Matrix.CreateScale(scale));
             // Draw Level
             int nTileWidth = 16;
             int nTileHeight = 16;
