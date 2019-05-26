@@ -29,11 +29,12 @@ yourself.
 
 
 From Javid:
-/*
+~~~~~~~
 OneLoneCoder.com - Code-It-Yourself! Simple Tile Based Platform Game
 "Its-a meee-a Jario!" - @Javidx9
 
 License
+~~~~~~~
 ~~~~~~~
 Copyright (C) 2018  Javidx9
 This program comes with ABSOLUTELY NO WARRANTY.
@@ -49,6 +50,7 @@ https://github.com/OneLoneCoder/videos/blob/master/LICENSE
 
 From Javidx9 :)
 ~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 Hello! Ultimately I don't care what you use this for. It's intended to be
 educational, and perhaps to the oddly minded - a little bit of fun.
 Please hack this, change it and use it in any way you see fit. You acknowledge
@@ -61,16 +63,19 @@ Cheers!
 
 Background
 ~~~~~~~~~~
+~~~~~~~~~~
 Tile maps are fundamental to most 2D games. This program explores emulating a classic 2D platformer
 using floating point truncation to implement robust collision between a moving tile and a tilemap
 representing the level.
 
 Controls
 ~~~~~~~~
+~~~~~~~~
 Left and Right arrow keys move Jario, Space bar jumps.
 (Up and Down also move jario)
 
 Author
+~~~~~~
 ~~~~~~
 Twitter: @javidx9
 Blog: www.onelonecoder.com
@@ -79,7 +84,8 @@ Discord: https://discord.gg/WhwHUMV
 
 Video:
 ~~~~~~
+~~~~~~
 https://youtu.be/oJvJZNyW_rw
 
 Last Updated: 04/02/2018
-*/
+~~~~~~
