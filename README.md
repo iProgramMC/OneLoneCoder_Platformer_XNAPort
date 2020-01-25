@@ -3,7 +3,7 @@ A port in C# with the XNA Game Framework of OneLoneCoder's (javidx9's) platforme
 This engine can also work with Monogame, which is a more "universal" XNA
 implementation.
 
-This program is protected under the GNU General Public License, v3.0.
+This program is protected under the MIT license now, as I feel it deserves a bit more freedom.
 
 OneLoneCoder Platformer XNA Port
 Copyright (C) 2018, iProgramMC, OneLoneCoder
